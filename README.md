@@ -11,7 +11,7 @@ A Socratic oral examination conducted by synthetic examiners — language models
 
 ## Read it
 
-- **Online:** https://mindattic.github.io/ElenchusAtScale/ (the full text as one page, under Docs)
+- **Online:** https://mindattic.github.io/Dissertation.ElenchusAtScale/ (the full text as one page, under Docs)
 - **By chapter:** `chapters/`
 
 | File | Contents |
@@ -30,16 +30,16 @@ A Socratic oral examination conducted by synthetic examiners — language models
 
 ## History
 
-Started inside [`mindattic/Gadfly`](https://github.com/mindattic/Gadfly) as `dissertation/` (GAD-T256), using the conventions [Synthetic Exchange Theory](https://github.com/mindattic/SyntheticExchangeTheory) had already worked out. Extracted into this standalone repo (GAD-T417) so the dissertation's own history, CI and GitHub Pages site are no longer coupled to Gadfly's exam-application deploys; no functional change to any chapter, note, ledger or export.
+Started inside [`mindattic/Gadfly`](https://github.com/mindattic/Gadfly) as `dissertation/` (GAD-T256), using the conventions [Synthetic Exchange Theory](https://github.com/mindattic/Dissertation.SyntheticExchangeTheory) had already worked out. Extracted into this standalone repo (GAD-T417) so the dissertation's own history, CI and GitHub Pages site are no longer coupled to Gadfly's exam-application deploys; no functional change to any chapter, note, ledger or export.
 
 ## Toolset
 
-Export, publish, word-count, scaffolding, verification-ledger and research-note conventions are shared with Synthetic Exchange Theory through the [Provenance](https://github.com/mindattic/Provenance) toolkit (its `DESIGN.md` is the convention of record), cloned beside this repo as `..\Provenance`. `academic.json` configures it for this manuscript.
+Export, publish, word-count, scaffolding, verification-ledger and research-note conventions are shared with Synthetic Exchange Theory through the [Dissertation.Tools](https://github.com/mindattic/Dissertation.Tools) toolkit (its `DESIGN.md` is the convention of record), cloned beside this repo as `..\Dissertation.Tools`. `academic.json` configures it for this manuscript.
 
 ```powershell
 powershell -File scripts\export.ps1                 # export (MindAttic.Export, configured by export.json)
 powershell -File scripts\export.ps1 -Publish         # also copy the newest bundle into exports\ and docs\elenchus-at-scale.md
-powershell -File ..\Provenance\scripts\Measure-Words.ps1 -ProjectRoot .
+powershell -File ..\Dissertation.Tools\scripts\Measure-Words.ps1 -ProjectRoot .
 ```
 
 Never hand-edit an export: edit the chapters under `chapters/`, then re-export.

@@ -1,16 +1,16 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-    Exports this manuscript through the Provenance toolkit and the MindAttic.Export library.
+    Exports this manuscript through the Dissertation.Tools toolkit and the MindAttic.Export library.
 
 .DESCRIPTION
-    Thin shim over Provenance's Export-Manuscript.ps1 (see its DESIGN.md). Reads export.json
+    Thin shim over Dissertation.Tools' Export-Manuscript.ps1 (see its DESIGN.md). Reads export.json
     (title page, sources, output folder, formats) and writes a versioned bundle "<fileBaseName> V<N>.*"
     plus description.txt and keywords.txt into the output folder. The previous bundle is archived into
     Archives\v<N>\ first (archive, never delete). -Publish then copies the new bundle into exports\ and
     the Pages article named in academic.json.
 
-    The toolkit is found at $env:PROVENANCE_HOME, else ..\Provenance beside this repo's git root, else
+    The toolkit is found at $env:PROVENANCE_HOME, else ..\Dissertation.Tools beside this repo's git root, else
     the legacy $env:MINDATTIC_ACADEMIC. Set PROVENANCE_DRYRUN=1 to print the folder found and exit
     without exporting.
 
@@ -31,14 +31,14 @@ while ($gitRoot -and -not (Test-Path (Join-Path $gitRoot '.git'))) {
 }
 $kits = @()
 if ($env:PROVENANCE_HOME) { $kits += $env:PROVENANCE_HOME }
-$kits += (Join-Path (Split-Path $gitRoot -Parent) 'Provenance')
+$kits += (Join-Path (Split-Path $gitRoot -Parent) 'Dissertation.Tools')
 if ($env:MINDATTIC_ACADEMIC) { $kits += $env:MINDATTIC_ACADEMIC }
 $kit = $kits | Where-Object { Test-Path (Join-Path $_ 'scripts\Export-Manuscript.ps1') } | Select-Object -First 1
-if (-not $kit) { throw "Provenance not found; looked in: $($kits -join '; ')" }
+if (-not $kit) { throw "Dissertation.Tools not found; looked in: $($kits -join '; ')" }
 $kit = (Resolve-Path -LiteralPath $kit).Path
 
 if ($env:PROVENANCE_DRYRUN) {
-    Write-Host "Provenance: $kit"
+    Write-Host "Dissertation.Tools: $kit"
     exit 0
 }
 
