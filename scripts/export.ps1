@@ -10,8 +10,8 @@
     Archives\v<N>\ first (archive, never delete). -Publish then copies the new bundle into exports\ and
     the Pages article named in academic.json.
 
-    The toolkit is found at $env:PROVENANCE_HOME, else ..\Dissertation.Tools beside this repo's git root, else
-    the legacy $env:MINDATTIC_ACADEMIC. Set PROVENANCE_DRYRUN=1 to print the folder found and exit
+    The toolkit is found at $env:DISSERTATION_TOOLS_HOME, else ..\Dissertation.Tools beside this repo's git root, else
+    the legacy $env:MINDATTIC_ACADEMIC. Set DISSERTATION_TOOLS_DRYRUN=1 to print the folder found and exit
     without exporting.
 
 .EXAMPLE
@@ -30,14 +30,14 @@ while ($gitRoot -and -not (Test-Path (Join-Path $gitRoot '.git'))) {
     $gitRoot = $parent
 }
 $kits = @()
-if ($env:PROVENANCE_HOME) { $kits += $env:PROVENANCE_HOME }
+if ($env:DISSERTATION_TOOLS_HOME) { $kits += $env:DISSERTATION_TOOLS_HOME }
 $kits += (Join-Path (Split-Path $gitRoot -Parent) 'Dissertation.Tools')
 if ($env:MINDATTIC_ACADEMIC) { $kits += $env:MINDATTIC_ACADEMIC }
 $kit = $kits | Where-Object { Test-Path (Join-Path $_ 'scripts\Export-Manuscript.ps1') } | Select-Object -First 1
 if (-not $kit) { throw "Dissertation.Tools not found; looked in: $($kits -join '; ')" }
 $kit = (Resolve-Path -LiteralPath $kit).Path
 
-if ($env:PROVENANCE_DRYRUN) {
+if ($env:DISSERTATION_TOOLS_DRYRUN) {
     Write-Host "Dissertation.Tools: $kit"
     exit 0
 }
